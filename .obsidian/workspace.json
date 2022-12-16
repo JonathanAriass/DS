@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "5cb9c961d63f9073",
@@ -141,7 +140,7 @@
   "lastOpenFiles": [
     "Img/Adapter(Clases).png",
     "Img/State.png",
-    "EjemploCommand.png",
+    "Img/EjemploCommand.png",
     "Patrones.md",
     "Img/Command.png",
     "Img/Template.png",
