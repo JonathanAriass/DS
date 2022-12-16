@@ -1,0 +1,152 @@
+{
+  "main": {
+    "id": "376e1cd4ea3ec278",
+    "type": "split",
+    "children": [
+      {
+        "id": "06f29c078007d145",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b3f70aed99926b62",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Patrones.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0c96187af3ebbe58",
+    "type": "split",
+    "children": [
+      {
+        "id": "f5f3b6405166327e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b929525fc850b34c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "89729623fbb2b344",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "aeadd361fa13ceae",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "right": {
+    "id": "5cb9c961d63f9073",
+    "type": "split",
+    "children": [
+      {
+        "id": "bfc4f1b5b98e998e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "33795c019d7a57b0",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Patrones.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "03a6bddc1189447b",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Patrones.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "beab2bc60f977f33",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "32fb9699c84d4180",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Patrones.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "b929525fc850b34c",
+  "lastOpenFiles": [
+    "Img/Adapter(Clases).png",
+    "Img/State.png",
+    "EjemploCommand.png",
+    "Patrones.md",
+    "Img/Command.png",
+    "Img/Template.png",
+    "Img/Composite.png",
+    "Img/Estrategy.png",
+    "2022-12-16.md"
+  ]
+}
