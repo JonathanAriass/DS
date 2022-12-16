@@ -2,7 +2,6 @@
 Define una familia de algoritmos, encapsula cada uno y los hace intercambiables. Permite que el algoritmo varié de forma independiente a los clientes que lo usan.
 
 ![alt text](https://github.com/JonathanAriass/DS/blob/teoria/Img/Estrategy.png?raw=true)
-![[Estrategy.png]]
 
 ```java
 public interface PayStrategy {
@@ -146,7 +145,7 @@ Crecerá el número de objetos y se puede complicar la comunicación entre el co
 ## Composite (estructurales de objetos)
 Permite componer objetos en estructuras arbóreas para representar jerarquías de todo-parte, de modo que los clientes puedan tratar a los objetos individuales y a los compuestos de manera uniforme.
 
-![[Composite.png]]
+![alt text](https://github.com/JonathanAriass/DS/blob/teoria/Img/Composite.png?raw=true)
 
 ```java
 public interface Shape {
@@ -212,7 +211,7 @@ Y cuando se haga una estructura en árbol el CompoundShape se comportará de la 
 ## STATE (comportamiento de objetos)
 Permite a un objeto alterar su comportamiento cuando cambia su estado interno. Parecerá como si el objeto hubiera cambiado su clase.
 
-![[State.png]]
+![alt text](https://github.com/JonathanAriass/DS/blob/teoria/Img/State.png?raw=true)
 
 ```java
 public abstract class State {
@@ -303,7 +302,7 @@ Con esto son los propios estados los que se manejan a si mismos.
 ## Template method (comportamiento de clases)
 Define el esqueleto de un algoritmo en una operación, difiriendo algunos pasos hasta las subclases. Permite que éstas redefinan ciertos pasos del algoritmo sin cambiar la estructura del algoritmo en sí.
 
-![[Template.png]]
+![alt text](https://github.com/JonathanAriass/DS/blob/teoria/Img/Template.png?raw=true)
 
 ```java
 public abstract class Network {
@@ -390,11 +389,11 @@ Los template methods podran llamar a los siguientes metodos:
 Convierte la interfaz de una clase en otra que es la que esperan los clientes. Permite que trabajen juntas clases que de otro modo no podrían por tener interfaces incompatibles.
 
 #### Adapter de clases
-![[Adapter(Clases).png]]
+![alt text](https://github.com/JonathanAriass/DS/blob/teoria/Img/Adapter(Clases).png?raw=true)
 Se hace uso de la herencia multiple para poder usar una interfaz para un objeto que no tiene nada en común con esta.
 
 #### Adapter de objetos
-![[Adapter(Objetos).png]]
+![alt text](https://github.com/JonathanAriass/DS/blob/teoria/Img/Adapter(Objetos).png?raw=true)
 En este caso lo que se hace es adaptar el objeto a la interfaz Target.
 
 
@@ -404,10 +403,10 @@ En este caso lo que se hace es adaptar el objeto a la interfaz Target.
 ## Command (comportamiento de objetos)
 Encapsula una petición dentro de un objeto, permitiendo parametrizar a los clientes con distintas peticiones, encolarlas, guardarlas en un registro de sucesos o implementar un mecanismo de undo/redo.
 
-![[Command.png]]
+![alt text](https://github.com/JonathanAriass/DS/blob/teoria/Img/Command.png?raw=true)
 
 ### Ejemplo
-![[EjemploCommand.png]]
+![alt text](https://github.com/JonathanAriass/DS/blob/teoria/Img/EjemploCommand.png?raw=true)
 
 ```java
 public class EditorTextUI {
@@ -483,7 +482,7 @@ Con este patron resulta sencillo añadir nuevas acciones, al no tener que tocar 
 ## Decorator (estructural de objetos)
 Añade responsabilidades adicionales a un objeto dinámicamente. Los decoradores proporcionan una alternativa flexible a la herencia para extender la funcionalidad.
 
-![[Decorator.png]]
+![alt text](https://github.com/JonathanAriass/DS/blob/teoria/Img/Decorator.png?raw=true)
 
 Este sería el componente (interfaz):
 ```java
