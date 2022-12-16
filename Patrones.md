@@ -1,7 +1,7 @@
 ## Strategy (comportamiento de objetos)
 Define una familia de algoritmos, encapsula cada uno y los hace intercambiables. Permite que el algoritmo varié de forma independiente a los clientes que lo usan.
 
-![Alt text](../Img/Estrategy.png "Strategy")
+![alt text](https://github.com/JonathanAriass/DS/blob/teoria/Img/Estrategy.png?raw=true)
 ![[Estrategy.png]]
 
 ```java
