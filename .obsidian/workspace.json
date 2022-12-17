@@ -136,16 +136,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "b929525fc850b34c",
+  "active": "b3f70aed99926b62",
   "lastOpenFiles": [
+    "Img/Observer.png",
+    "Patrones.md",
+    "Img/Visitor.png",
     "Img/Adapter(Clases).png",
     "Img/State.png",
     "Img/EjemploCommand.png",
-    "Patrones.md",
     "Img/Command.png",
     "Img/Template.png",
     "Img/Composite.png",
-    "Img/Estrategy.png",
-    "2022-12-16.md"
+    "Img/Estrategy.png"
   ]
 }

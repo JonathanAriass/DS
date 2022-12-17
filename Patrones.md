@@ -581,8 +581,382 @@ public class Demo {
 Se puede ver como en la segunda linea del main se crea un DataSourceDecorator el cual:
 * Crea un objeto de lectura/escritura en fichero dentro de un objeto de encriptacion
 * Y el objeto de encriptacion esta dentro del de compresion
+
 Una vez se llame al encoded.writeData el orden de ejecucion sera el siguiente:
 	compresion --> encriptacion --> escritura en fichero
 Esto es gracias a la concatenacion de las llamadas al writeData con diferentes metodos dentro de cada ConcreteDecorator.
 
 Esto dara mas flexibilidad que la herencia estatica y evita que las clases de arriba de la jerarquia esten repletas de funcionalidades. Pero un decorador y sus componentes no son identicos y ademas habra muchos objetos pequeños creando un sistema complejo de aprender y depurar.
+
+
+
+
+## Observer (comportamiento de objetos)
+Define una dependencia uno-a-muchos entre objetos, de modo que cuando un objeto cambia su estado, todos los demás objetos dependientes se modifican y actualizan automáticamente.
+
+![alt text](https://github.com/JonathanAriass/DS/blob/teoria/Img/Observer.png?raw=true)
+
+```java
+public class EventManager {
+
+	// Lista de suscriptores
+	Map<String, List<EventListener>> listeners = new HashMap<>(); 
+
+	public EventManager(String... operations) {
+		for (String op : operations)
+			this.listeners.put(operation, new ArrayList<>());
+	}
+
+	public void suscribe(String event, EventListener listener) {
+		List<EventListener> users = listeners.get(event);
+		users.add(listener);
+	}	
+
+	public void unsuscribe(String event, EventListener listener) {
+		// Se elimina de la lista de suscritos
+		...
+	}
+
+	// Metodo que notifica a todos los suscritos de los cambios
+	public void notify(String event, File file) {
+		List<EventListener> users = listeners.get(event);
+		for (EventListener e : users) {
+			e.update(event, file);
+		}
+	}
+
+}
+```
+
+```java
+public class Editor {
+
+	public EventManager manager;
+	private File file;
+
+	public Editor() {
+		// Se iniciliza los suscriptores de tipo open y save
+		this.manager = new EventManager("open", "save");
+	}
+
+	public void openFile(String file) {
+		this.file = new File(file);
+		manager.notify("open", file);
+	}
+
+	public void saveFile() {
+		if (this.file != null) {
+			manager.notify("save", this.file);
+		} else {
+			...
+		}
+	}
+
+}
+```
+Con este editor ya tenemos control sobre los cambios que se puedan realizar en la aplicación, en este caso los eventos son: abrir y guardar ficheros
+
+```java
+public interface EventListener {
+
+	public void update(String event, File file);
+
+}
+```
+
+```java
+public class EmailNotificationListener implements EventListener {
+
+	private String email;
+
+	public EmailNotificationListener(String email) {this.email = email;}
+
+	@Override 
+	public void update(String event, File file) {
+		// Se hace algo para avisar de los cambios al resto de los usuarios
+		System.out.println("Email to " + email + ": Someone has performed " + eventType + " operation with the following file: " + file.getName());
+	}
+
+}
+```
+Habra otro Listener que hereda de EventListener que sera: LogOpenListener
+
+```java
+public class Demo {
+
+	public static void main(String[] args) {
+        Editor editor = new Editor();
+        editor.events.subscribe("open", new LogOpenListener("/path/to/log/file.txt"));
+        editor.events.subscribe("save", new EmailNotificationListener("admin@example.com"));
+
+        try {
+            editor.openFile("test.txt");
+            editor.saveFile();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+```
+Ahora cuando se realice un cambio los listeners seran los propios encargados de propagar la informacion de que se ha actualizado el contexto de la apliacion, en este caso que se abre o guarda un fichero.
+En este caso concreto se esta usando el protocolo de actualizacion de push que updatea todos los objetos suscritos necesiten o no esa informacion. El otro metodo es el pull que obtiene la informacion actualizada cuando se necesite.
+
+
+
+
+
+## Prototype (creacion de objetos)
+Especifica los tipos de objetos a crear usando una instancia prototípica, y crear nuevos objetos copiando dicho prototipo.
+
+Un buen ejemplo de la vida real seria el de las celulas. La celula original seria el prototipo y es el que realiza la copia.
+
+![alt text](https://github.com/JonathanAriass/DS/blob/teoria/Img/Prototype.png?raw=true)
+
+```java
+public abstract class Shape {
+
+	public int x, y;
+	public String color;
+
+	public Shape() {...}
+
+	public Shape(Shape target) {
+		if (target != null) {
+			// se pasan todas las propiedades
+		}
+	}
+
+	public abstract Shape clone();
+
+	@Override
+	public boolean equals(Object obj2) {
+		if (!(obj2 instanceof Shape)) return false;
+        Shape shape2 = (Shape) obj2;
+        return shape2.x == x && shape2.y == y && Objects.equals(shape2.color, color);
+	}
+
+}
+```
+
+```java
+public class Circle extends Shape {
+
+	public int radius;
+
+	public Circle() {...}
+
+	public Circle(Circle target) {
+		super(target);
+		if (target != null) {
+			this.radius = target.radius;
+		}
+	}
+
+	@Override
+	public Shape clone() {
+		return new Circle(this);
+	}
+
+	@Override
+	public boolean equals(Object obj2) {
+		if (!(obj2 instanceof Circle) || !super.equals(obj2)) return false;
+        Circle shape2 = (Circle) obj2;
+        return shape2.radius == radius;
+	}
+
+}
+```
+Lo mismo para el rectangulo.
+
+```java
+public class Demo {
+
+	public static void main(String[] args) {
+        List<Shape> shapes = new ArrayList<>();
+        List<Shape> shapesCopy = new ArrayList<>();
+
+        Circle circle = new Circle();
+        circle.x = 10;
+        circle.y = 20;
+        circle.radius = 15;
+        circle.color = "red";
+        shapes.add(circle);
+
+        Circle anotherCircle = (Circle) circle.clone();
+        shapes.add(anotherCircle);
+
+        Rectangle rectangle = new Rectangle();
+        rectangle.width = 10;
+        rectangle.height = 20;
+        rectangle.color = "blue";
+        shapes.add(rectangle);
+
+        cloneAndCompare(shapes, shapesCopy);
+    }
+
+    private static void cloneAndCompare(List<Shape> shapes, List<Shape> shapesCopy) {
+        for (Shape shape : shapes) {
+            shapesCopy.add(shape.clone());
+        }
+
+        for (int i = 0; i < shapes.size(); i++) {
+            if (shapes.get(i) != shapesCopy.get(i)) {
+                System.out.println(i + ": Shapes are different objects (yay!)");
+                if (shapes.get(i).equals(shapesCopy.get(i))) {
+                    System.out.println(i + ": And they are identical (yay!)");
+                } else {
+                    System.out.println(i + ": But they are not identical (booo!)");
+                }
+            } else {
+                System.out.println(i + ": Shape objects are the same (booo!)");
+            }
+        }
+    }
+
+}
+```
+
+```
+0: Shapes are different objects (yay!)
+0: And they are identical (yay!)
+1: Shapes are different objects (yay!)
+1: And they are identical (yay!)
+2: Shapes are different objects (yay!)
+2: And they are identical (yay!)
+```
+Este es el resultado despues de ejecutar el programa y hacer diferentes clonaciones.
+
+
+
+
+
+## Visitor (comportamiento de objetos)
+Representa una operación a realizar sobre una estructura de objetos. Permite definir nuevas operaciones sin modificar las clase de los elementos sobre los que opera.
+
+![alt text](https://github.com/JonathanAriass/DS/blob/teoria/Img/Visitor.png?raw=true)
+
+```java
+public interface Shape {
+
+	void move(int x, int y);
+	void draw();
+	String accept(Visitor visitor);
+
+}
+```
+
+```java
+public class Dot implements Shape {
+
+	private int x, y, id;
+
+	public Dot () {...}
+
+	public Dot(int id, int x, int y) {
+		// Aplicamos valores
+	}
+
+	@Override
+	public void move(int x, int y) {...}
+
+	@Override
+	public void draw() {...}
+
+	@Override
+	public String accept(Visitor visitor) {
+		return visitor.visitDot(this);
+	}
+
+}
+```
+
+```java
+public class Circle extends Dot {
+
+	private int radius;
+
+	public Circle(int id, int x, int y, int radius) {
+		super(id, x, y);
+		this.radius = radius;
+	}
+
+	@Override
+	public String accept(Visitor visitor) {
+		return visitor.visitCircle(this);
+	}
+
+}
+```
+Se hara tambien el cuadrado y un CompoundShape que tendra una lista de figuras (composite).
+
+```java
+public interface Visitor {
+
+	String visitDot(Dot dot);
+	String visitCircle(Circle circle);
+	String visitRectangle(Rectangle rectangle);
+	String visitCompountGraphic(CompoundShape cg);
+
+}
+```
+
+```java
+public class XMLExportVisitor implements Visitor {
+
+	public String export(Shape... arg) {
+		for (Shape sh : arg)
+			shape.accept(this);
+	}
+
+	@Override
+	public String visitDot(Dot d) {
+		return ...;
+	}
+
+	@Override
+	public String visitCircle(Circle c) {
+		return ...;
+	}
+
+	@Override
+	public String visitRectangle(Rectangle r) {
+		return ...;
+	}
+
+	@Override
+	public String visitcompoundGraphic(CompoundShape cg) {
+		return ...;
+	}
+
+}
+```
+
+```java
+public class Demo {
+
+	public static void main(String[] args) {
+        Dot dot = new Dot(1, 10, 55);
+        Circle circle = new Circle(2, 23, 15, 10);
+        Rectangle rectangle = new Rectangle(3, 10, 17, 20, 30);
+
+        CompoundShape compoundShape = new CompoundShape(4);
+        compoundShape.add(dot);
+        compoundShape.add(circle);
+        compoundShape.add(rectangle);
+
+        CompoundShape c = new CompoundShape(5);
+        c.add(dot);
+        compoundShape.add(c);
+
+        export(circle, compoundShape);
+    }
+
+    private static void export(Shape... shapes) {
+        XMLExportVisitor exportVisitor = new XMLExportVisitor();
+        System.out.println(exportVisitor.export(shapes));
+    }
+
+}
+```
+De esta forma se podra hacer el recorrido para todos los diferentes elementos.
