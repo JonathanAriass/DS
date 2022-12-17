@@ -584,6 +584,7 @@ Se puede ver como en la segunda linea del main se crea un DataSourceDecorator el
 
 Una vez se llame al encoded.writeData el orden de ejecucion sera el siguiente:
 	compresion --> encriptacion --> escritura en fichero
+	
 Esto es gracias a la concatenacion de las llamadas al writeData con diferentes metodos dentro de cada ConcreteDecorator.
 
 Esto dara mas flexibilidad que la herencia estatica y evita que las clases de arriba de la jerarquia esten repletas de funcionalidades. Pero un decorador y sus componentes no son identicos y ademas habra muchos objetos pequeños creando un sistema complejo de aprender y depurar.
